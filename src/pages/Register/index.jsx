@@ -4,18 +4,20 @@ import { Input } from "../../components/Input";
 import {useForm} from 'react-hook-form';
 
 import {yupResolver} from '@hookform/resolvers/yup';
-import loginSchema from "../../schema/loginSchema";
+import registerSchema from "../../schema/registerSchema";
 import { Spacing } from "../../components/Spacing";
 import { Logo } from '../../components/logo';
 import { Actions, Form } from '../../components/Form';
 import { Main } from '../../components/Main/main';
 import { Button } from "../../components/Button";
-import { useNavigate } from 'react-router-dom';
+import { ContactlessPayment } from '@phosphor-icons/react';
+import {  useNavigate } from 'react-router-dom';
 
 
 
-export default function Login() {
+export default function Register() {
     const navigate = useNavigate();
+
     const {
         handleSubmit,
         control,
@@ -25,7 +27,7 @@ export default function Login() {
         
 
     } = useForm({
-        resolver: yupResolver(loginSchema),
+        resolver: yupResolver(registerSchema),
        mode: 'onChange',
     });
 
@@ -38,6 +40,14 @@ export default function Login() {
             <Logo src={logo} />
 
             <Form onSubmit={handleSubmit(onSubmit)}>
+                <Spacing $bottom={16}>
+                <Input
+                control={control}
+                name='name'
+                label='Name'
+                
+                />
+                 </Spacing>
                 <Spacing $bottom={16}>
                 <Input
                 control={control}
@@ -56,13 +66,22 @@ export default function Login() {
                 
                 />
                 </Spacing>
+                <Spacing $bottom={36}>
+                <Input
+                control={control}
+                name='confirmPassword'
+                label='Confirm Password'
+                type='password'
+                
+                />
+                </Spacing>
                 <Actions>
                     <Spacing $bottom={24}>
-                        <Button disabled={!isValid} $color="secondary" type='subnit'>SING IN</Button>
+                        <Button disabled={!isValid} $color="secondary" type='subnit'>SAVE</Button>
                     </Spacing>
 
                     <Spacing>
-                        <Button  onClick={() => navigate('/register')} type='button' $color="primaryDark">SING UP</Button>
+                        <Button  onClick={() => navigate(-1)} type='button' $color="primaryDark">BACK</Button>
                     </Spacing>
                 </Actions>
                 

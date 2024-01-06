@@ -1,40 +1,53 @@
+
 import { Controller } from "react-hook-form";
-import { ErrorMassage, InputView, Label } from "./styles"
+import { ErrorMessage, IconButton, InputRow, InputView, Label } from "./styles";
+import { Eye, EyeSlash } from "@phosphor-icons/react";
+import { useState } from "react";
 
 export const Input = ({
-    label,
-    name,
-    control
+  label,
+  control,
+  name,
+  placeholder,
+  type = 'text',
 }) => {
-    return (
+  const [show, setShow] = useState(false);
 
-        <Controller
-            name={name}
-            control={control}
-            render={({ field, fieldState: { error } }) => (
+  return (
+    <Controller
+      name={name}
+      control={control}
+      render={({ field, fieldState: {error}}) => (
+        <InputView >
+          <Label>{label}</Label>
 
-                <InputView isError={Boolean (error)}>
-                    <Label>{label}</Label>
+          <InputRow $error={!!error}>
+            <input
+              placeholder={placeholder ?? label}
+              type={!show ? type : 'text'}
+              {...field}
+            />
 
+            {
+              type === 'password' && (
+                <IconButton onClick={() => setShow((value) => !value)} type="button" $error={!!error}>
+                  {
+                    !show
+                      ? (<Eye />)
+                      : (<EyeSlash />)
+                  }
+                </IconButton>
+              )
+            }
+          </InputRow>
 
-                    <input placeholder={label}
-                        {...field}
-                    />
-
-                    {
-                        error && (
-                            <ErrorMassage>{error.message}</ErrorMassage>
-                        )
-
-                    }
-                </InputView>
-            )}
-
-        />
-
-
-    );
-
-
-
+          {
+            error && (
+              <ErrorMessage>{error.message}</ErrorMessage>
+            )
+          }
+        </InputView>
+      )}
+    />
+  );
 };
