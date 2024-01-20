@@ -4,7 +4,7 @@ import pokeball from '../../assets/poke-bolll.svg';
 
 
 
-export const AuthLayuot = styled.section`
+export const AuthLayout = styled.section`
 
 width: 100%;
 height: 100%;

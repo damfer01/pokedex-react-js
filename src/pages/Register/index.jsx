@@ -10,13 +10,22 @@ import { Logo } from '../../components/logo';
 import { Actions, Form } from '../../components/Form';
 import { Main } from '../../components/Main/main';
 import { Button } from "../../components/Button";
-import { ContactlessPayment } from '@phosphor-icons/react';
 import {  useNavigate } from 'react-router-dom';
+import { register } from '../../service/authServices';
+import { useStore } from '../../store';
+
 
 
 
 export default function Register() {
     const navigate = useNavigate();
+
+    const {
+        user,
+
+    } = useStore();
+   
+   
 
     const {
         handleSubmit,
@@ -31,8 +40,24 @@ export default function Register() {
        mode: 'onChange',
     });
 
-    const onSubmit = (data) =>{
-        console.log(data);
+    const onSubmit = async (data) =>{
+        const{
+            name,
+            username,
+            password,
+            confirmPassword,
+        } = data;
+        
+        const {success, message , result } = await register(name, username , password, confirmPassword);
+
+        alert(message);
+
+
+        if(success) {
+            user.setUserData(result);
+
+         navigate('/');
+        }
     };
     
     return(
@@ -89,3 +114,4 @@ export default function Register() {
         </Main>
     );
 };
+
