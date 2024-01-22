@@ -12,4 +12,5 @@ import styled from "styled-components";
     display: flex;
     flex-direction: column;
     flex: 1;
+    overflow: hidden;
   `;

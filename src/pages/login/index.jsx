@@ -11,11 +11,19 @@ import { Actions, Form } from '../../components/Form';
 import { Main } from '../../components/Main/main';
 import { Button } from "../../components/Button";
 import { useNavigate } from 'react-router-dom';
+import { useStore } from '../../store';
+ import { login } from '../../service/authServices';
 
 
 
 export default function Login() {
     const navigate = useNavigate();
+
+    const {
+        user,
+
+    }=useStore();
+
     const {
         handleSubmit,
         control,
@@ -26,11 +34,29 @@ export default function Login() {
 
     } = useForm({
         resolver: yupResolver(loginSchema),
-       mode: 'onChange',
+       mode: 'onChange', 
+       defaultValues:{
+        username : "damfer",
+        password : "123456",
+       }
     });
 
-    const onSubmit = (data) =>{
-        console.log(data);
+    const onSubmit = async (data) =>{
+        const{
+            username,
+            password,
+        }= data;
+
+        const {success , message, result} = await login(username, password);
+
+        alert(message);
+
+        if(success){
+            user.setUserData(result);
+
+            navigate('/');
+        } 
+        
     };
     
     return(

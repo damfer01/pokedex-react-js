@@ -7,5 +7,6 @@ export const HeaderView = styled.header`
     justify-content: center;
     width: 100%;
     height: 72px;
+    background-color : ${({theme}) => theme.colors.primary};
 
 `;

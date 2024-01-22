@@ -3,14 +3,14 @@ import { AppSection, Main } from "./style"
 import { Header } from "../Header";
 
 export const AppLayout = ({
-    Children,
+    children,
 }) => {
 
     return (
         <AppSection>
             <Header />
 
-            <Main>{Children}</Main>
+            <Main>{children}</Main>
         </AppSection>
 
     );

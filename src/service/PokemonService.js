@@ -1,8 +1,11 @@
 import Api from '../config/api';
 
-export async function getAllPokemon(page, perPage){
+export async function getAllPokemon(token, page, perPage){
     try{
         const {data} = await Api.get('/pokemon',{
+          headers:{
+            'Authoruzation': `Bearer ${token}`
+          },
         params:{
         page,
         perPage,
