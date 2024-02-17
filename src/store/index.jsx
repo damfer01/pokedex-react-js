@@ -1,23 +1,29 @@
-import React , {createContext , useContext} from "react";
-import { useUser } from "./hooks/user";
+import {
+  createContext,
+  useContext,
+} from 'react';
+import { useUser } from './hooks/user';
 
-
-export const store = createContext({ 
-    user: '',
+export const store = createContext({
+  user: {
+    name: '',
     token: '',
-    setUserData: (user) => {}
+    setUserData: (user) => {},
+  },
 });
-const {Provider} = store
-export function StateProvider({children}) {
-   const user = useUser();
 
-    return(
-        <Provider
-          value={{
-            user,
-         }}
-        >{children}</Provider>
-    )
+const { Provider } = store;
+
+export function StateProvider({ children }) {
+  const user = useUser();
+
+  return (
+    <Provider
+      value={{
+        user,
+      }}
+    >{children}</Provider>
+  );
 };
 
-export const useStore = () => useContext(store)
+export const useStore = () => useContext( store );

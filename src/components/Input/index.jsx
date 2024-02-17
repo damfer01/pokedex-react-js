@@ -1,4 +1,3 @@
-
 import { Controller } from "react-hook-form";
 import { ErrorMessage, IconButton, InputRow, InputView, Label } from "./styles";
 import { Eye, EyeSlash } from "@phosphor-icons/react";
@@ -18,7 +17,7 @@ export const Input = ({
       name={name}
       control={control}
       render={({ field, fieldState: {error}}) => (
-        <InputView >
+        <InputView>
           <Label>{label}</Label>
 
           <InputRow $error={!!error}>

@@ -1,55 +1,43 @@
-import { ThemeProvider } from 'styled-components';
+import { ThemeProvider } from "styled-components";
+import { RouterProvider } from "react-router-dom";
 
-import theme from './theme';
+import { AuthLayout } from "./components/layouts/authLayout";
 
-import { RouterProvider } from 'react-router-dom';
-import './global.css'
-import authRouter from './routes/authroutes';
-import appRouter from './routes/appRouter'
-import { AuthLayout } from './components/layouts/authLayouts';
-import { AppLayout } from './components/layouts/appLayouts';
+import theme from "./theme";
 
-import { StateProvider, useStore } from './store';
+import authRouter from "./routes/authRouter";
+import appRouter from "./routes/appRouter";
 
-
-
+import './global.css';
+import { AppLayout } from "./components/layouts/appLayout";
+import { StateProvider, useStore } from "./store";
 
 function App() {
-  return(
-  <ThemeProvider theme={theme} >
+  return (
+    <ThemeProvider theme={theme}>
       <StateProvider>
-        <Layout/>
+        <Layout />
       </StateProvider>
-</ThemeProvider>
+    </ThemeProvider>
   );
-
 }
 
-
-
- function Layout(){
-
+function Layout() {
   const {
-    user, 
+    user,
   } = useStore();
 
-
-
-  return  user.name !== ''
-  ? (
-    <AppLayout>
-     <RouterProvider router={ appRouter} />
-     </AppLayout>
-  )
-  :(
-    <AuthLayout>
-  <RouterProvider router={ authRouter} />
-</AuthLayout>
-  );
-
-
+  return user.name !== ''
+    ? (
+        <AppLayout>
+          <RouterProvider router={appRouter} />
+        </AppLayout>
+      )
+    : (
+        <AuthLayout>
+          <RouterProvider router={authRouter} />
+        </AuthLayout>
+      );
 }
-
-
 
 export default App;

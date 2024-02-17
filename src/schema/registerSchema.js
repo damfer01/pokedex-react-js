@@ -1,13 +1,12 @@
-import * as yup from 'yup'
+import * as yup from "yup";
 
-const message = 'required'
+const message = 'Required Field';
 
 const registerSchema = yup.object({
-    name: yup.string().required(message),
-    username: yup.string().required(message).min(5,'Minimum of 5 characters'),
-    password: yup.string().required(message).min(6,'Minimum of 5 characters'),
-    confirmPassword: yup.string().required(message).min(6,'Minimum of 5 characters').oneOf([yup.ref('password') , null], 'Password must match'),
+  name: yup.string().required(message),
+  username: yup.string().required(message).min(5, 'Minimum of 5 Characters'),
+  password: yup.string().required(message).min(6, 'Minimum of 6 Characters'),
+  confirmPassword: yup.string().required(message).min(6, 'Minimum of 6 Characters').oneOf([yup.ref('password'), null], 'Passwords must match'),
 });
 
 export default registerSchema;
-

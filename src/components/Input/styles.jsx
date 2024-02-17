@@ -19,6 +19,8 @@ export const InputRow = styled.div`
     : theme.colors.secondary
   };
   border-radius: 8px;
+  // vertical - horizontal
+  margin: 4px 0px;
 
   & > input {
     flex: 1;
@@ -26,8 +28,6 @@ export const InputRow = styled.div`
     height: 100%;
     background-color: transparent;
     border: none;
-    // vertical - horizontal
-    margin: 4px 0px;
     // vertical - horizontal
     padding: 0px 8px;
 
